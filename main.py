@@ -4,33 +4,31 @@ Main script to run the Evolutionary Algorithm for VRPTW with r101.csv data
 import os
 from vrptw_data import VRPTWData
 from evolutionary_algorithm import EvolutionaryVRPTW
+import config
 
 
 def main():
     """Main function to run the evolutionary algorithm"""
     
-    # Data file path
-    data_path = os.path.join('data', 'r101.csv')
-    
     print("="*80)
     print("EVOLUTIONARY ALGORITHM FOR VRPTW - R101 Dataset")
     print("="*80)
-    print(f"\nLoading data from: {data_path}")
+    print(f"\nLoading data from: {config.DATA_FILE}")
     
     # Load data
-    data = VRPTWData(data_path)
+    data = VRPTWData(config.DATA_FILE)
     print(f"Loaded {data.get_num_customers()} customers")
     print(f"Depot location: ({data.depot['XCOORD']}, {data.depot['YCOORD']})")
     
-    # Algorithm parameters
+    # Algorithm parameters from config
     params = {
-        'population_size': 30,
-        'generations': 50,
-        'crossover_rate': 0.8,
-        'mutation_rate': 0.2,
-        'tournament_size': 3,
-        'elitism_count': 2,
-        'vehicle_capacity': 200
+        'population_size': config.POPULATION_SIZE,
+        'generations': config.GENERATIONS,
+        'crossover_rate': config.CROSSOVER_RATE,
+        'mutation_rate': config.MUTATION_RATE,
+        'tournament_size': config.TOURNAMENT_SIZE,
+        'elitism_count': config.ELITISM_COUNT,
+        'vehicle_capacity': config.VEHICLE_CAPACITY
     }
     
     print("\nAlgorithm Parameters:")
@@ -53,8 +51,7 @@ def main():
     print("="*80)
     
     # Save results to file
-    output_file = 'vrptw_solution.txt'
-    with open(output_file, 'w') as f:
+    with open(config.OUTPUT_FILE, 'w') as f:
         f.write("VRPTW Solution for r101.csv\n")
         f.write("="*80 + "\n\n")
         f.write(f"Number of vehicles: {best_solution.num_vehicles}\n")
@@ -71,7 +68,7 @@ def main():
             f.write(f"  Demand: {route.total_demand}/{params['vehicle_capacity']}\n")
             f.write(f"  Feasible: {route.feasible}\n\n")
     
-    print(f"\nSolution saved to: {output_file}")
+    print(f"\nSolution saved to: {config.OUTPUT_FILE}")
 
 
 if __name__ == "__main__":
