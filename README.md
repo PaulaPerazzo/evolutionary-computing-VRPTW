@@ -1,6 +1,6 @@
 # evolutionary-computing-VRPTW
 
-objective: Minimize number of vehicles.
+objective: 1) Minimize number of vehicles and 2) Minimize total distance.
 
 subject to:
 - demands of each fabric
