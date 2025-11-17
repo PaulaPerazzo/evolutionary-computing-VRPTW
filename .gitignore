@@ -1,1 +1,8 @@
 env
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+vrptw_solution.txt
+vrptw_solution_enhanced.txt
